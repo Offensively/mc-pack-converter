@@ -158,8 +158,17 @@ async function main() {
         case "1.16":
         case "1.17":
         case "1.18":
-            if (!fs.existsSync(villager)) {
-                fs.copyFileSync(tempFolder+'/assets/minecraft/textures/entity/villager/farmer.png', villager)
+            if (!fs.existsSync(villager) && fs.existsSync(tempFolder+'/assets/minecraft/textures/entity/villager')) {
+                let oldVillager = '';
+                for (const file in fs.readdirSync(tempFolder+'/assets/minecraft/textures/entity/villager')) {
+                    if (file.endsWith('.png')) {
+                        oldVillager = file;
+                        break;
+                    }
+                }
+                if (oldVillager != '') {
+                    fs.copyFileSync(tempFolder+'/assets/minecraft/textures/entity/villager/farmer.png', villager);
+                }
             }
     }
     progress.increment();
