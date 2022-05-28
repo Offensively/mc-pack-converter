@@ -16,6 +16,9 @@ To install this project run
     
 ## Usage
 
+```bash
+  node index.js -i path/to/input -o path/to/output -v 1.18
+```
 ```
 Minecraft Texture Pack Converter Help
 	-i - The input zip file path
