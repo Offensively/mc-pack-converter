@@ -22,7 +22,7 @@ async function main() {
         console.log("Invalid path: " + input);
         return;
     }
-    if (!fs.existsSync(output) || !output.endsWith('.zip')) {
+    if (!output.endsWith('.zip')) {
         console.log("Invalid path: " + output);
         return;
     }
@@ -46,7 +46,9 @@ async function main() {
         progress.stop();
         process.stdout.moveCursor(0, -1);
         process.stdout.clearLine(1);
-        fs.unlinkSync(tempFile);
+        if (fs.existsSync(tempFile)) {
+            fs.unlinkSync(tempFile);
+        }
         fs.rmSync(tempFolder, { recursive: true, force: true });
         if (err.name.includes('directory not empty, rename')) {
             main();
