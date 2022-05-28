@@ -1,5 +1,5 @@
 {
-  "name": "texturepackconverter",
+  "name": "mc-pack-converter",
   "version": "1.0.0",
   "description": "Convert Minecraft Java Edition Texture Packs between different versions!",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "author": "OffensivelyKind",
-  "license": "MIT",
+  "license": "GPL",
   "repository": {
     "url": "https://github.com/Offensively/mc-pack-converter.git"
   },
