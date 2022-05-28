@@ -64,10 +64,8 @@ module.exports.versionToMcmeta = (version) => {
 
 module.exports.jsonToLang = (json) => {
     let res = "";
-    for (var i = 0; i < Object.keys(json).length; i++) {
-        const key = Object.keys(json)[i];
-        const value = json[key];
-        res = res + key + "=" + value + "\n";
+    for (const [key, value] of Object.entries(json)) {
+        res += key + "=" + value + "\n";
     }
     return res;
 }
