@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Pack Converter</title>
+    <style>
+        body {
+            background-color: rgb(9, 141, 38);
+        }
+
+        #content {
+            background-color: white;
+            border: 5px solid black;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40%;
+            height: 75%;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+        .convert-btn {
+            background: #59d61a;
+            background-image: -webkit-linear-gradient(top, #59d61a, #2fa308);
+            background-image: -moz-linear-gradient(top, #59d61a, #2fa308);
+            background-image: -ms-linear-gradient(top, #59d61a, #2fa308);
+            background-image: -o-linear-gradient(top, #59d61a, #2fa308);
+            background-image: linear-gradient(to bottom, #59d61a, #2fa308);
+            -webkit-border-radius: 28;
+            -moz-border-radius: 28;
+            border-radius: 28px;
+            font-family: Courier New;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+            border: 0;
+        }
+
+        .convert-btn:hover {
+            background: #3ad40f;
+            background-image: -webkit-linear-gradient(top, #3ad40f, #11ad1b);
+            background-image: -moz-linear-gradient(top, #3ad40f, #11ad1b);
+            background-image: -ms-linear-gradient(top, #3ad40f, #11ad1b);
+            background-image: -o-linear-gradient(top, #3ad40f, #11ad1b);
+            background-image: linear-gradient(to bottom, #3ad40f, #11ad1b);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="center">
+        <form method="POST" action="/upload-pack" enctype="multipart/form-data" id="packUpload">
+            <h2><u>Pack Converter</u></h2>
+    
+            <input type="file" id="pack" name="pack" required>
+    
+            <br><br>
+    
+            <label for="versions">Choose a version: </label>
+            <select name="version" id="versions" form="packUpload">
+                <option value="1.8">1.8</option>
+                <option value="1.9">1.9</option>
+                <option value="1.10">1.10</option>
+                <option value="1.11">1.11</option>
+                <option value="1.12">1.12</option>
+                <option value="1.13">1.13</option>
+                <option value="1.14">1.14</option>
+                <option value="1.15">1.15</option>
+                <option value="1.16">1.16</option>
+                <option value="1.17">1.17</option>
+                <option value="1.18">1.18</option>
+            </select>
+
+            <br><br>
+            
+            <input type="submit" class="convert-btn" value="Convert!">
+        </form>
+    </div>
+</body>
+</html>
