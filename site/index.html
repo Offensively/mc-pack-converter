@@ -6,12 +6,14 @@
     <title>MC Pack Converter</title>
     <style>
         body {
-            background-color: rgb(9, 141, 38);
+            background-color: rgb(252, 233, 255);
+            font-family: sans-serif;
+            font-size: larger;
         }
 
         #content {
             background-color: white;
-            border: 5px solid black;
+            /* border: 5px solid black; */
             border-radius: 15px;
             display: flex;
             justify-content: center;
@@ -27,6 +29,7 @@
             transform: translate(-50%, -50%);
             padding: 10px;
         }
+
         .convert-btn {
             background: #59d61a;
             background-image: -webkit-linear-gradient(top, #59d61a, #2fa308);
@@ -43,6 +46,7 @@
             padding: 10px 20px 10px 20px;
             text-decoration: none;
             border: 0;
+            cursor: pointer;
         }
 
         .convert-btn:hover {
@@ -55,17 +59,31 @@
             text-decoration: none;
         }
     </style>
+    <script>
+        function findGetParameter(parameterName) {
+            var result = null,
+                tmp = [];
+            location.search
+                .substr(1)
+                .split("&")
+                .forEach(function (item) {
+                  tmp = item.split("=");
+                  if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+                });
+            return result;
+        }
+    </script>
 </head>
 <body>
     <div id="content" class="center">
         <form method="POST" action="/upload-pack" enctype="multipart/form-data" id="packUpload">
-            <h2><u>Pack Converter</u></h2>
+            <h1><u>Pack Converter</u></h1>
     
             <input type="file" id="pack" name="pack" required>
     
             <br><br>
     
-            <label for="versions">Choose a version: </label>
+            <label for="versions">Choose version: </label>
             <select name="version" id="versions" form="packUpload">
                 <option value="1.8">1.8</option>
                 <option value="1.9">1.9</option>
@@ -83,7 +101,14 @@
             <br><br>
             
             <input type="submit" class="convert-btn" value="Convert!">
+            <br>
+            <span id="errorMessage" style="color: red; font-size: small;"></span>
         </form>
     </div>
+    <script>
+        if (findGetParameter('error')) {
+            document.getElementById('errorMessage').innerHTML = findGetParameter('error');
+        }
+    </script>
 </body>
 </html>

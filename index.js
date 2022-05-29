@@ -16,16 +16,19 @@ module.exports.convertPack = async (input, output, version, isCLI) => {
             res.success = false;
             res.reason = "Invalid path: " + input;
             resolve(res);
+            return;
         }
         if (!output.endsWith('.zip')) {
             res.success = false;
             res.reason = "Invalid path: " + output;
             resolve(res);
+            return;
         }
         if (!utils.isValidVersion(version)) {
             res.success = false;
-            res.reason = "Invalid verion: " + version;
+            res.reason = "Invalid version: " + version;
             resolve(res);
+            return;
         }
         
         if (!fs.existsSync(__dirname + "/temp")) {
@@ -92,6 +95,12 @@ module.exports.convertPack = async (input, output, version, isCLI) => {
         }
     
         // Change pack.mcmeta
+        if (!fs.existsSync(tempFolder+"/pack.mcmeta")) {
+            res.success = false;
+            res.reason = "Not a resource pack!";
+            resolve(res);
+            return;
+        }
         let packMcmetaRaw = fs.readFileSync(tempFolder+"/pack.mcmeta");
         let packMcmetaJson = JSON.parse(packMcmetaRaw);
         packMcmetaJson.pack.pack_format = parseInt(utils.versionToMcmeta(version));

@@ -10,7 +10,7 @@ const main = require('./index');
 const app = express();
 
 let finishedConverting = [];
-let errorConverting = [];
+let errorConverting = {};
 
 // Enable file uploads
 app.use(fileUpload({
@@ -27,10 +27,7 @@ app.use(express.static(__dirname+'/site'))
 app.post('/upload-pack', async (req, res) => {
     try {
         if (!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
+            res.redirect('./?error='+encodeURIComponent('No file uploaded!'));
         } else {
             let pack = req.files.pack;
 
@@ -44,15 +41,21 @@ app.post('/upload-pack', async (req, res) => {
                 await pack.mv('./site/uploads/' + packUuid);
 
                 main.convertPack(__dirname+'/site/uploads/' + packUuid, __dirname+'/site/uploads/' + packUuid, req.body.version, false)
-                    .then( (res) => {
-                        if (res.success) {
+                    .then( (result) => {
+                        if (result.success) {
                             finishedConverting.push(packUuid);
                         } else {
-                            errorConverting.push(packUuid);
+                            errorConverting[packUuid] = result.reason;
                         }
                     })
     
                 res.redirect('./converting.html?packName='+packUuid)
+            } else {
+                if (pack.mimetype != "application/zip") {
+                    res.redirect('./?error='+encodeURIComponent('Not a zip file!'));
+                } else if (pack.size <! 6000000) {
+                    res.redirect('./?error='+encodeURIComponent('Filesize too big!'));
+                }
             }
         }
     } catch (err) {
@@ -66,9 +69,13 @@ app.get('/check-conversion', (req, res) => {
     if (finishedConverting.includes(packName)) {
         finishedConverting.splice(finishedConverting.indexOf(packName));
         res.redirect('./done.html');
-    } else if (errorConverting.includes(packName)) {
-        errorConverting.splice(errorConverting.indexOf(packName));
-        res.redirect('./error.html?packName='+packName);
+    } else if (Object.keys(errorConverting).includes(packName)) {
+        if (errorConverting[packName] == "Not a resource pack!") {
+            res.redirect('./?error='+encodeURIComponent('Not a resource pack!'));
+        } else {
+            res.redirect('./error.html?packName='+packName);
+        }
+        delete errorConverting[packName];
     } else {
         res.redirect('./converting.html?packName='+packName);
     }

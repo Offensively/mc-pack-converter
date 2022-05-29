@@ -50,6 +50,13 @@
 <body>
     <div id="content" class="center">
         <p>Something went wrong while converting!</p>
+        <br>
+        <span id="errorMessage" style="color: red; font-size: small;"></span>
     </div>
+    <script>
+        if (findGetParameter('error')) {
+            document.getElementById('errorMessage').innerHTML = 'Error: '+findGetParameter('error');
+        }
+    </script>
 </body>
 </html>
