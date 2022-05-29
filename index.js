@@ -316,7 +316,7 @@ module.exports.convertPack = async (input, output, version, isCLI) => {
 }
 
 async function main() {
-    const help = "Minecraft Texture Pack Converter Help\n\t-i - The input zip file path\n\t-o - The output zip file path\n\t-v - The version to switch to";
+    const help = "Minecraft Texture Pack Converter Help\n\t-i - The input zip file path\n\t-o - The output zip file path\n\t-v - The version to switch to\n\t-s - Start web server";
 
     if (!process.argv.includes('-s')) {
         if (!process.argv.includes("-i") || !process.argv.includes("-o") || !process.argv.includes("-v") || process.argv.includes("-h") || process.argv.includes("--help")) {

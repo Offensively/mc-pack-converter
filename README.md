@@ -24,6 +24,7 @@ Minecraft Texture Pack Converter Help
 	-i - The input zip file path
 	-o - The output zip file path
 	-v - The version to switch to
+	-s - Start web server
 ```
 
 ## Contributing
