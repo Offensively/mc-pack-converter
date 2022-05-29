@@ -1,7 +1,7 @@
 
 # Minecraft Pack Converter
 
-This is a fun project that allows you to convert Minecraft resource packs between different versions!
+This is a fun project that allows you to convert Minecraft resource packs between different versions! Here is the link to the web version for anyone who is lazy: [http://mc-pack-converter.minecraftnoob.com](http://mc-pack-converter.minecraftnoob.com)
 
 
 ## Installation
