@@ -68,12 +68,12 @@ app.get('/check-conversion', (req, res) => {
     const packName = req.query.packName;
     if (finishedConverting.includes(packName)) {
         finishedConverting.splice(finishedConverting.indexOf(packName));
-        res.redirect('./done.html');
+        res.redirect('./done.html?packName='+packName);
     } else if (Object.keys(errorConverting).includes(packName)) {
         if (errorConverting[packName] == "Not a resource pack!") {
             res.redirect('./?error='+encodeURIComponent('Not a resource pack!'));
         } else {
-            res.redirect('./error.html?packName='+packName);
+            res.redirect('./error.html');
         }
         delete errorConverting[packName];
     } else {
